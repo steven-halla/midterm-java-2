@@ -1,9 +1,6 @@
-// Steven Halla
-// Midterm
-// Java 2
-
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 public class BankAccount {
     private int accountID = 0;
@@ -11,10 +8,7 @@ public class BankAccount {
     private double balance = 0;
     private double annualInterestRate = 0;
     private Date dateCreated;
-
-//    private ArrayList ;
     private ArrayList<Transaction> transactions = new ArrayList<>();
-
 
     public BankAccount() {
         dateCreated = new Date();
@@ -27,10 +21,10 @@ public class BankAccount {
         dateCreated = new Date();
     }
 
-
     public void withdraw(double amount) {
         if (amount <= balance) {
             balance -= amount;
+            transactions.add(new Transaction('W', amount, balance, "Withdrawal"));
         } else {
             System.out.println("Insufficient balance.");
         }
@@ -38,6 +32,7 @@ public class BankAccount {
 
     public void deposit(double amount) {
         balance += amount;
+        transactions.add(new Transaction('D', amount, balance, "Deposit"));
     }
 
     public double getMonthlyInterestRate() {
@@ -48,10 +43,6 @@ public class BankAccount {
         double monthlyInterestRate = annualInterestRate / 12 / 100;
         return balance * monthlyInterestRate;
     }
-
-
-
-    //getters
 
     public int getAccountID() {
         return accountID;
@@ -69,8 +60,6 @@ public class BankAccount {
         return dateCreated;
     }
 
-    //setters
-
     public void setAccountID(int accountID) {
         this.accountID = accountID;
     }
@@ -83,44 +72,41 @@ public class BankAccount {
         this.annualInterestRate = annualInterestRate;
     }
 
-
-
-
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        BankAccount account = null;
 
+        while (true) {
+            System.out.println("\nBank Account System\n");
+            System.out.println("1. Create Savings Account");
+            System.out.println("2. Exit");
+            System.out.print("\nEnter your choice: ");
+
+            int choice = scanner.nextInt();
+
+            if (choice == 1) {
+                System.out.print("Enter your name: ");
+                scanner.nextLine();
+                String name = scanner.nextLine();
+
+                System.out.print("Enter your account ID: ");
+                int accountID = scanner.nextInt();
+
+                System.out.print("Enter your balance: ");
+                double balance = scanner.nextDouble();
+
+                account = new BankAccount(name, accountID, balance);
+
+                System.out.println("\nSavings Account created successfully!");
+                System.out.println("Name: " + name);
+                System.out.println("Account ID: " + accountID);
+                System.out.println("Balance: $" + balance);
+                System.out.println("Date Created: " + account.getDateCreated());
+            } else if (choice == 2) {
+                break;
+            } else {
+                System.out.println("\nInvalid choice. Please try again.");
+            }
+        }
     }
 }
-
-
-
-
-
-//    Design a class named BankAccount that contains:
-//
-//        A private int data field named accountID for the account (default 0).
-
-//A private data field CustomerName of the String type to store the name of the customer, .
-//A private double data field named balance for the account (default 0).
-//A private double data field named annualInterestRate that stores the current interest rate (default 0).
-
-
-//A private Date data field named dateCreated that stores the date when the account was created.
-
-//A private data field named transactions of type ArrayList that stores the
-// transaction for the accounts. Each transaction is an instance of the Transaction class.
-
-//A no-arg constructor that creates a default account.
-
-//A constructor that creates an account with the specified CustomerName,
-// accountID and initial balance.
-
-//The accessor and mutator methods for accountID, balance, and annualInterestRate.
-
-//The accessor method for dateCreated.
-
-//A method named getMonthlyInterestRate() that returns the monthly interest rate.
-
-//Monthly interest is balance * monthlyInterestRate.
-// monthlyInterestRate is annualInterestRate / 12. Note that annualInterestRate is
-// a percentage, e.g.,
-// like 4.5%. You need to divide it by 100.

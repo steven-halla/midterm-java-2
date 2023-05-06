@@ -1,10 +1,13 @@
-class SavingAccount extends BankAccount {
+public class SavingsAccount extends BankAccount {
+    public static void main(String[] args) {
 
-    public SavingAccount() {
+    }
+
+    public SavingsAccount() {
         super();
     }
 
-    public SavingAccount(String customerName, int accountID, double balance) {
+    public SavingsAccount(String customerName, int accountID, double balance) {
         super(customerName, accountID, balance);
     }
 
@@ -17,5 +20,3 @@ class SavingAccount extends BankAccount {
         }
     }
 }
-
-// no over draft
