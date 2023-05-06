@@ -49,7 +49,7 @@ public class AccountCreator {
         }
 
         String customerName = firstName + " " + lastName;
-        BankAccount account = new BankAccount(customerName, accountID, balance);
+        SavingsAccount account = new SavingsAccount(customerName, accountID, balance);
         System.out.println("\nSavings Account created successfully!");
         System.out.println("Name: " + customerName);
         System.out.println("Account ID: " + accountID);
