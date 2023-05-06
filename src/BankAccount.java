@@ -85,9 +85,28 @@ public class BankAccount {
             int choice = scanner.nextInt();
 
             if (choice == 1) {
-                System.out.print("Enter your name: ");
+                System.out.print("Please input your first name: ");
                 scanner.nextLine();
-                String name = scanner.nextLine();
+                String firstName = "";
+                while (true) {
+                    firstName = scanner.nextLine();
+                    if (firstName.matches("^[a-zA-Z]*$")) {
+                        break;
+                    }
+                    System.out.print("Invalid input. First name can only contain letters. Please try again: ");
+                }
+
+                System.out.print("Please input your last name: ");
+                String lastName = "";
+                while (true) {
+                    lastName = scanner.nextLine();
+                    if (lastName.matches("^[a-zA-Z]*$")) {
+                        break;
+                    }
+                    System.out.print("Invalid input. Last name can only contain letters. Please try again: ");
+                }
+
+                String customerName = firstName + " " + lastName;
 
                 System.out.print("Enter your account ID: ");
                 int accountID = scanner.nextInt();
@@ -95,10 +114,10 @@ public class BankAccount {
                 System.out.print("Enter your balance: ");
                 double balance = scanner.nextDouble();
 
-                account = new BankAccount(name, accountID, balance);
+                account = new BankAccount(customerName, accountID, balance);
 
                 System.out.println("\nSavings Account created successfully!");
-                System.out.println("Name: " + name);
+                System.out.println("Name: " + customerName);
                 System.out.println("Account ID: " + accountID);
                 System.out.println("Balance: $" + balance);
                 System.out.println("Date Created: " + account.getDateCreated());
@@ -109,4 +128,7 @@ public class BankAccount {
             }
         }
     }
+
+
+
 }
