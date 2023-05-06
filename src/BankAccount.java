@@ -27,6 +27,19 @@ public class BankAccount {
         dateCreated = new Date();
     }
 
+
+    public void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+        } else {
+            System.out.println("Insufficient balance.");
+        }
+    }
+
+    public void deposit(double amount) {
+        balance += amount;
+    }
+
     public double getMonthlyInterestRate() {
         return annualInterestRate / 12;
     }
