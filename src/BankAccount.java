@@ -27,6 +27,19 @@ public class BankAccount {
         dateCreated = new Date();
     }
 
+    public double getMonthlyInterestRate() {
+        return annualInterestRate / 12;
+    }
+
+    public double getMonthlyInterest() {
+        double monthlyInterestRate = annualInterestRate / 12 / 100;
+        return balance * monthlyInterestRate;
+    }
+
+
+
+    //getters
+
     public int getAccountID() {
         return accountID;
     }
@@ -38,6 +51,12 @@ public class BankAccount {
     public double getAnnualInterestRate() {
         return annualInterestRate;
     }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    //setters
 
     public void setAccountID(int accountID) {
         this.accountID = accountID;
@@ -83,3 +102,12 @@ public class BankAccount {
 // accountID and initial balance.
 
 //The accessor and mutator methods for accountID, balance, and annualInterestRate.
+
+//The accessor method for dateCreated.
+
+//A method named getMonthlyInterestRate() that returns the monthly interest rate.
+
+//Monthly interest is balance * monthlyInterestRate.
+// monthlyInterestRate is annualInterestRate / 12. Note that annualInterestRate is
+// a percentage, e.g.,
+// like 4.5%. You need to divide it by 100.
