@@ -20,6 +20,40 @@ public class BankAccount {
         dateCreated = new Date();
     }
 
+    public BankAccount(String customerName, int accountID, double balance) {
+        this.customerName = customerName;
+        this.accountID = accountID;
+        this.balance = balance;
+        dateCreated = new Date();
+    }
+
+    public int getAccountID() {
+        return accountID;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public double getAnnualInterestRate() {
+        return annualInterestRate;
+    }
+
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public void setAnnualInterestRate(double annualInterestRate) {
+        this.annualInterestRate = annualInterestRate;
+    }
+
+
+
+
     public static void main(String[] args) {
 
     }
@@ -42,3 +76,10 @@ public class BankAccount {
 
 //A private data field named transactions of type ArrayList that stores the
 // transaction for the accounts. Each transaction is an instance of the Transaction class.
+
+//A no-arg constructor that creates a default account.
+
+//A constructor that creates an account with the specified CustomerName,
+// accountID and initial balance.
+
+//The accessor and mutator methods for accountID, balance, and annualInterestRate.
