@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class AccountCreator {
 
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -11,7 +10,8 @@ public class AccountCreator {
             System.out.println("Please choose an option:");
             System.out.println("1: Create a savings account");
             System.out.println("2: Create a checking account");
-            System.out.println("3: Exit");
+            System.out.println("3: Deposit");
+            System.out.println("4: Exit");
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character
@@ -24,6 +24,9 @@ public class AccountCreator {
                     createCheckingAccount(scanner);
                     break;
                 case 3:
+                    deposit(scanner);
+                    break;
+                case 4:
                     System.out.println("Goodbye!");
                     return;
                 default:
@@ -38,6 +41,26 @@ public class AccountCreator {
 
     private static void createCheckingAccount(Scanner scanner) {
         createAccount(scanner, false);
+    }
+
+    private static void deposit(Scanner scanner) {
+        System.out.println("Choose the account type to deposit:");
+        System.out.println("1: Savings");
+        System.out.println("2: Checking");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+
+        switch (choice) {
+            case 1:
+                System.out.println("Deposit to Savings account functionality not implemented yet.");
+                break;
+            case 2:
+                System.out.println("Deposit to Checking account functionality not implemented yet.");
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+        }
     }
 
     private static void createAccount(Scanner scanner, boolean isSavingsAccount) {
