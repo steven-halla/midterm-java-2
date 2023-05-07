@@ -16,7 +16,8 @@ public class AccountCreator {
             System.out.println("1: Create a savings account");
             System.out.println("2: Create a checking account");
             System.out.println("3: Deposit");
-            System.out.println("4: Exit");
+            System.out.println("4: Withdraw");
+            System.out.println("5: Exit");
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume the newline character
@@ -32,6 +33,9 @@ public class AccountCreator {
                     deposit(scanner);
                     break;
                 case 4:
+                    withdraw(scanner);
+                    break;
+                case 5:
                     System.out.println("Goodbye!");
                     return;
                 default:
@@ -39,6 +43,27 @@ public class AccountCreator {
             }
         }
     }
+
+    private static void withdraw(Scanner scanner) {
+        System.out.println("Choose the account type to withdraw from:");
+        System.out.println("1: Savings");
+        System.out.println("2: Checking");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+
+        switch (choice) {
+            case 1:
+                withdrawFromSavingsAccount(scanner);
+                break;
+            case 2:
+                withdrawFromCheckingAccount(scanner);
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+        }
+    }
+
 
     private static void createSavingsAccount(Scanner scanner) {
         BankAccount account = createAccount(scanner, true);
