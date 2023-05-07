@@ -54,7 +54,6 @@ public class AccountCreator {
         }
     }
 
-
     private static void deposit(Scanner scanner) {
         System.out.println("Choose the account type to deposit:");
         System.out.println("1: Savings");
@@ -97,7 +96,8 @@ public class AccountCreator {
         double depositAmount = scanner.nextDouble();
         scanner.nextLine(); // Consume the newline character
 
-        account.deposit(depositAmount);
+        Transaction transaction = new Transaction('D', depositAmount, account.getBalance() + depositAmount, "Deposit to savings account");
+        account.deposit(transaction);
         System.out.println("Deposit successful. New balance: $" + account.getBalance());
     }
 
@@ -123,14 +123,12 @@ public class AccountCreator {
         double depositAmount = scanner.nextDouble();
         scanner.nextLine(); // Consume the newline character
 
-        if (depositAmount <= 0) {
-            System.out.println("Invalid amount. Deposit amount must be greater than 0.");
-            return;
-        }
-
-        account.deposit(depositAmount);
+        Transaction transaction = new Transaction('D', depositAmount, account.getBalance() + depositAmount, "Deposit to checking account");
+        account.deposit(transaction);
         System.out.println("Deposit successful. New balance: $" + account.getBalance());
     }
+
+
 
     private static BankAccount createAccount(Scanner scanner, boolean isSavingsAccount) {
         String firstName = "";
@@ -197,4 +195,3 @@ public class AccountCreator {
     }
 
 }
-

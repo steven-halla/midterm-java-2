@@ -30,10 +30,11 @@ public class BankAccount {
         }
     }
 
-    public void deposit(double amount) {
-        balance += amount;
-        transactions.add(new Transaction('D', amount, balance, "Deposit"));
+    public void deposit(Transaction transaction) {
+        balance += transaction.getAmount();
+        transactions.add(transaction);
     }
+
 
     public double getMonthlyInterestRate() {
         return annualInterestRate / 12;
