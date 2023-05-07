@@ -5,22 +5,41 @@ public class AccountCreator {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Welcome to the Account Creator!");
-        System.out.println("Please choose an option:");
-        System.out.println("1: Create a savings account");
-        System.out.println("2: Exit");
+        while (true) {
+            System.out.println("Welcome to the Account Creator!");
+            System.out.println("Please choose an option:");
+            System.out.println("1: Create a savings account");
+            System.out.println("2: Create a checking account");
+            System.out.println("3: Exit");
 
-        int choice = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline character
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
 
-        if (choice == 1) {
-            createSavingsAccount(scanner);
-        } else {
-            System.out.println("Goodbye!");
+            switch (choice) {
+                case 1:
+                    createSavingsAccount(scanner);
+                    break;
+                case 2:
+                    createCheckingAccount(scanner);
+                    break;
+                case 3:
+                    System.out.println("Goodbye!");
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
         }
     }
 
     private static void createSavingsAccount(Scanner scanner) {
+        createAccount(scanner, true);
+    }
+
+    private static void createCheckingAccount(Scanner scanner) {
+        createAccount(scanner, false);
+    }
+
+    private static void createAccount(Scanner scanner, boolean isSavingsAccount) {
         String firstName = "";
         String lastName = "";
 
@@ -67,13 +86,18 @@ public class AccountCreator {
         }
 
         String customerName = firstName + " " + lastName;
-        SavingsAccount account = new SavingsAccount(customerName, accountID, balance);
+        BankAccount account;
+        if (isSavingsAccount) {
+            account = new SavingsAccount(customerName, accountID, balance);
+            System.out.println("\nSavings Account created successfully!");
+        } else {
+            account = new CheckingAccount(customerName, accountID, balance);
+            System.out.println("\nChecking Account created successfully!");
+        }
 
-        System.out.println("\nSavings Account created successfully!");
         System.out.println("Name: " + customerName);
         System.out.println("Account ID: " + accountID);
         System.out.println("Balance: $" + balance);
         System.out.println("Date Created: " + account.getDateCreated());
     }
 }
-
