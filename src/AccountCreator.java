@@ -68,7 +68,7 @@ public class AccountCreator {
                 depositToSavingsAccount(scanner);
                 break;
             case 2:
-                System.out.println("Deposit to Checking account functionality not implemented yet.");
+                depositToCheckingAccount(scanner);
                 break;
             default:
                 System.out.println("Invalid choice. Please try again.");
@@ -96,6 +96,37 @@ public class AccountCreator {
         System.out.print("Enter the deposit amount: ");
         double depositAmount = scanner.nextDouble();
         scanner.nextLine(); // Consume the newline character
+
+        account.deposit(depositAmount);
+        System.out.println("Deposit successful. New balance: $" + account.getBalance());
+    }
+
+    private static void depositToCheckingAccount(Scanner scanner) {
+        System.out.print("Enter the account ID: ");
+        int accountID = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+
+        CheckingAccount account = null;
+        for (CheckingAccount ca : checkingAccounts) {
+            if (ca.getAccountID() == accountID) {
+                account = ca;
+                break;
+            }
+        }
+
+        if (account == null) {
+            System.out.println("Account not found. Please create an account first.");
+            return;
+        }
+
+        System.out.print("Enter the deposit amount: ");
+        double depositAmount = scanner.nextDouble();
+        scanner.nextLine(); // Consume the newline character
+
+        if (depositAmount <= 0) {
+            System.out.println("Invalid amount. Deposit amount must be greater than 0.");
+            return;
+        }
 
         account.deposit(depositAmount);
         System.out.println("Deposit successful. New balance: $" + account.getBalance());
