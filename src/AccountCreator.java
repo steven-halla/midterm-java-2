@@ -1,6 +1,11 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class AccountCreator {
+
+    private static List<SavingsAccount> savingsAccounts = new ArrayList<>();
+    private static List<CheckingAccount> checkingAccounts = new ArrayList<>();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -36,12 +41,19 @@ public class AccountCreator {
     }
 
     private static void createSavingsAccount(Scanner scanner) {
-        createAccount(scanner, true);
+        BankAccount account = createAccount(scanner, true);
+        if (account != null) {
+            savingsAccounts.add((SavingsAccount) account);
+        }
     }
 
     private static void createCheckingAccount(Scanner scanner) {
-        createAccount(scanner, false);
+        BankAccount account = createAccount(scanner, false);
+        if (account != null) {
+            checkingAccounts.add((CheckingAccount) account);
+        }
     }
+
 
     private static void deposit(Scanner scanner) {
         System.out.println("Choose the account type to deposit:");
@@ -53,7 +65,7 @@ public class AccountCreator {
 
         switch (choice) {
             case 1:
-                System.out.println("Deposit to Savings account functionality not implemented yet.");
+                depositToSavingsAccount(scanner);
                 break;
             case 2:
                 System.out.println("Deposit to Checking account functionality not implemented yet.");
@@ -63,7 +75,33 @@ public class AccountCreator {
         }
     }
 
-    private static void createAccount(Scanner scanner, boolean isSavingsAccount) {
+    private static void depositToSavingsAccount(Scanner scanner) {
+        System.out.print("Enter the savings account ID: ");
+        int accountID = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+
+        SavingsAccount account = null;
+        for (SavingsAccount sa : savingsAccounts) {
+            if (sa.getAccountID() == accountID) {
+                account = sa;
+                break;
+            }
+        }
+
+        if (account == null) {
+            System.out.println("Savings account not found. Please create an account first.");
+            return;
+        }
+
+        System.out.print("Enter the deposit amount: ");
+        double depositAmount = scanner.nextDouble();
+        scanner.nextLine(); // Consume the newline character
+
+        account.deposit(depositAmount);
+        System.out.println("Deposit successful. New balance: $" + account.getBalance());
+    }
+
+    private static BankAccount createAccount(Scanner scanner, boolean isSavingsAccount) {
         String firstName = "";
         String lastName = "";
 
@@ -123,5 +161,9 @@ public class AccountCreator {
         System.out.println("Account ID: " + accountID);
         System.out.println("Balance: $" + balance);
         System.out.println("Date Created: " + account.getDateCreated());
+
+        return account;
     }
+
 }
+
